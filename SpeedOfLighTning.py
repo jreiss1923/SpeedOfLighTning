@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from walk_time_differences import walk_time_differences, train_lists, irregular_stop_name_list
 import json
+import os
 
 app = Flask(__name__)
 
@@ -35,4 +36,5 @@ def get_difference():
     time_diff = walk_time_list[t_first_stop_value + " " + t_second_stop_value]
     return str(format(abs(time_diff/60), ".0f"))
 
-app.run(debug=True, port=33507)
+port = int(os.environ.get('PORT', 5000))
+app.run(port=port)
