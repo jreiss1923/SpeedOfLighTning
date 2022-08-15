@@ -1,1 +1,1 @@
-web: python SpeedOfLighhTning.py
+web: python SpeedOfLighTning.py
