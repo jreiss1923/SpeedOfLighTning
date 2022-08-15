@@ -5,22 +5,22 @@
 <body>
     <label for="list_of_lines">Choose a line: </label>
     <select name="list_of_lines" id="select_list_of_lines">
-        <option value="walk_time_difference_blue_0">Blue Line - Wonderland --> Bowdoin</option>
-        <option value="walk_time_difference_blue_1">Blue Line - Bowdoin --> Wonderland</option>
-        <option value="walk_time_difference_green_b_0">Green Line - Government Center --> Boston College</option>
-        <option value="walk_time_difference_green_b_1">Green Line - Boston College --> Government Center</option>
-        <option value="walk_time_difference_green_c_0">Green Line - Government Center --> Cleveland Circle</option>
-        <option value="walk_time_difference_green_c_1">Green Line - Cleveland Circle --> Government Center</option>
-        <option value="walk_time_difference_green_d_0">Green Line - North Station --> Riverside</option>
-        <option value="walk_time_difference_green_d_1">Green Line - Riverside --> North Station</option>
-        <option value="walk_time_difference_green_e_0">Green Line - Union Square --> Heath Street</option>
-        <option value="walk_time_difference_green_e_1">Green Line - Heath Street --> Union Square</option>
-        <option value="walk_time_difference_orange_0">Orange Line - Oak Grove --> Forest Hills</option>
-        <option value="walk_time_difference_orange_1">Orange Line - Forest Hills --> Oak Grove</option>
-        <option value="walk_time_difference_red_a_0">Red Line - Alewife --> Ashmont</option>
-        <option value="walk_time_difference_red_a_1">Red Line - Ashmont --> Alewife</option>
-        <option value="walk_time_difference_red_b_0">Red Line - Alewife --> Braintree</option>
-        <option value="walk_time_difference_red_b_1">Red Line - Braintree --> Alewife</option>
+        <option value="blue_0_list">Blue Line - Wonderland --> Bowdoin</option>
+        <option value="blue_1_list">Blue Line - Bowdoin --> Wonderland</option>
+        <option value="green_b_0_list">Green Line - Government Center --> Boston College</option>
+        <option value="green_b_1_list">Green Line - Boston College --> Government Center</option>
+        <option value="green_c_0_list">Green Line - Government Center --> Cleveland Circle</option>
+        <option value="green_c_1_list">Green Line - Cleveland Circle --> Government Center</option>
+        <option value="green_d_0_list">Green Line - North Station --> Riverside</option>
+        <option value="green_d_1_list">Green Line - Riverside --> North Station</option>
+        <option value="green_e_0_list">Green Line - Union Square --> Heath Street</option>
+        <option value="green_e_1_list">Green Line - Heath Street --> Union Square</option>
+        <option value="orange_0_list">Orange Line - Oak Grove --> Forest Hills</option>
+        <option value="orange_1_list">Orange Line - Forest Hills --> Oak Grove</option>
+        <option value="red_a_0_list">Red Line - Alewife --> Ashmont</option>
+        <option value="red_a_1_list">Red Line - Ashmont --> Alewife</option>
+        <option value="red_b_0_list">Red Line - Alewife --> Braintree</option>
+        <option value="red_b_1_list">Red Line - Braintree --> Alewife</option>
     </select>
 
     <label for="first_stop_list">Choose your first stop: </label>
@@ -33,12 +33,18 @@
         <option>Select a line...</option>
     </select>
 
+    <div id="time_waiting">
+        <p>Select a line and two stops to see how much time you should spend waiting at the T.</p>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script charset="utf-8" type="text/javascript">
         $(function() {
         var dropdown = {
             list_of_lines: $('#select_list_of_lines'),
-            first_stop_list: $('#select_first_stop_list')
+            first_stop_list: $('#select_first_stop_list'),
+            second_stop_list: $('#select_second_stop_list'),
+            
         };
 
         // function to call XHR and update goodsrec dropdown
@@ -47,28 +53,80 @@
             dropdown.first_stop_list.attr('disabled', 'disabled');
 
             if (list_of_lines.length) {
-                dropdown.first_stop_list.empty();
+                dropdown.first_stop_list.empty()
                 $.getJSON("{{ url_for('select_line') }}", {list_of_lines: list_of_lines}, function(data) {
-                    data = '{"CLEVELAND_CIRCLE_1 ENGLEWOOD_AV_1": -289,"CLEVELAND_CIRCLE_1 DEAN_RD_1": -512,"CLEVELAND_CIRCLE_1 TAPPAN_ST_1": -707,"CLEVELAND_CIRCLE_1 WASHINGTON_SQ_1": -852,"CLEVELAND_CIRCLE_1 FAIRBANKS_ST_1": -1206,"CLEVELAND_CIRCLE_1 BRANDON_HALL_1": -1379,"CLEVELAND_CIRCLE_1 SUMMIT_AV_1": -1558,"CLEVELAND_CIRCLE_1 COOLIDGE_CORNER_1": -1894,"CLEVELAND_CIRCLE_1 ST_PAUL_ST_1": -2202,"CLEVELAND_CIRCLE_1 KENT_ST_1": -2384}'
-                    console.log(data)
-                    data = JSON.parse(data)
                     data.forEach(function(item) {
+                        console.log(typeof(item))
                         dropdown.first_stop_list.append(
-                            $('<option>', {
-                                value: item.id,
-                                text: item.name
-                            })
+                            $('<option value="' + item + '">' + item + '</option>')
                         );
                     });
                     dropdown.first_stop_list.removeAttr('disabled');
+                    dropdown.second_stop_list.empty();
+                    $('#time_waiting p').text('Select a line and two stops to see how much time you should spend waiting at the T.');
                 });
             }
         }
 
         // event listener to customer dropdown change
-        dropdown.list_of_lines.on('change', function() {
+        dropdown.list_of_lines.on('click', function() {
             updateFirstStopList();
         });
+
+        var dropdown_two = {
+            list_of_lines: $('#select_list_of_lines'),
+            first_stop_list: $('#select_first_stop_list'),
+            second_stop_list: $('#select_second_stop_list')
+        };
+
+        // function to call XHR and update goodsrec dropdown
+        function updateSecondStopList() {
+            var list_of_lines = dropdown_two.list_of_lines.val();
+            var first_stop_list = dropdown_two.first_stop_list.val();
+            dropdown_two.second_stop_list.attr('disabled', 'disabled');
+
+            if (first_stop_list.length) {
+                dropdown_two.second_stop_list.empty()
+                console.log(first_stop_list)
+                $.getJSON("{{ url_for('select_stop') }}", {list_of_lines: list_of_lines, first_stop_list: first_stop_list}, function(data) {
+                    data.forEach(function(item) {
+                        console.log(typeof(item))
+                        dropdown_two.second_stop_list.append(
+                            $('<option value="' + item + '">' + item + '</option>')
+                        );
+                    });
+                    dropdown_two.second_stop_list.removeAttr('disabled');
+                    $('#time_waiting p').text('Select a line and two stops to see how much time you should spend waiting at the T.');
+                });
+            }
+        }
+
+        // event listener to customer dropdown change
+        dropdown_two.first_stop_list.on('click', function() {
+            updateSecondStopList();
+        });
+
+        var dropdown_three = {
+            list_of_lines: $('#select_list_of_lines'),
+            first_stop_list: $('#select_first_stop_list'),
+            second_stop_list: $('#select_second_stop_list'),
+        };
+
+        function updateTimeWaiting() {
+            var list_of_lines = dropdown_three.list_of_lines.val();
+            var first_stop_list = dropdown_three.first_stop_list.val();
+            var second_stop_list = dropdown_three.second_stop_list.val();
+            
+            if (second_stop_list.length) {
+                $.getJSON("{{ url_for('get_difference') }}", {list_of_lines:list_of_lines, first_stop_list:first_stop_list, second_stop_list:second_stop_list}, function(data) {
+                    $('#time_waiting p').text('You should wait up to ' + data + ' minutes.');
+                });
+            }
+        }
+
+        dropdown_three.second_stop_list.on('click', function() {
+            updateTimeWaiting();
+        })
 
     });
     </script>
