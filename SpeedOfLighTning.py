@@ -35,4 +35,4 @@ def get_difference():
     time_diff = walk_time_list[t_first_stop_value + " " + t_second_stop_value]
     return str(format(abs(time_diff/60), ".0f"))
 
-app.run()
+app.run(debug=True, port=33507)
