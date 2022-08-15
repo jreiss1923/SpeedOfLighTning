@@ -37,4 +37,4 @@ def get_difference():
     return str(format(abs(time_diff/60), ".0f"))
 
 port = int(os.environ.get('PORT', 5000))
-app.run(port=port)
+app.run(host='0.0.0.0', port=port)
