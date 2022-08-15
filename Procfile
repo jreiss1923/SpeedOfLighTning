@@ -1,1 +1,1 @@
-web: python SpeedOfLighTning.py
+worker: python SpeedOfLighTning.py
