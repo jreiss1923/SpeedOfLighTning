@@ -1,0 +1,27 @@
+body {
+    text-align: center;
+}
+
+h3 {
+    font-size: 96px;
+}
+
+.col-12 {
+    text-align: center;
+}
+
+.col-6 {
+    text-align: center;
+}
+
+.row {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+select {
+    color: #000;
+    color: rgba(0,0,0,0);
+    text-shadow: 0 0 0 #000;
+    text-align: center;
+  }
