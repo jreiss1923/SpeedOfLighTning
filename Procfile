@@ -1,1 +1,1 @@
-web: python SpeedOfLighTning.py
+web: gunicorn SpeedOfLighTning:app
