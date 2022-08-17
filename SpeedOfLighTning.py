@@ -36,5 +36,5 @@ def get_difference():
     time_diff = walk_time_list[t_first_stop_value + " " + t_second_stop_value]
     return str(format(abs(time_diff/60), ".0f"))
 
-port = int(os.environ.get('PORT', 5000))
+port = int(os.environ.get('PORT'))
 app.run(port=port)
