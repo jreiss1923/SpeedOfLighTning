@@ -1,41 +1,69 @@
 <!DOCTYPE html>
 <head>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Speed Of LighTning</title>
 </head>
 <body>
-    <label for="list_of_lines">Choose a line: </label>
-    <select name="list_of_lines" id="select_list_of_lines">
-        <option value="blue_0_list">Blue Line - Wonderland --> Bowdoin</option>
-        <option value="blue_1_list">Blue Line - Bowdoin --> Wonderland</option>
-        <option value="green_b_0_list">Green Line - Government Center --> Boston College</option>
-        <option value="green_b_1_list">Green Line - Boston College --> Government Center</option>
-        <option value="green_c_0_list">Green Line - Government Center --> Cleveland Circle</option>
-        <option value="green_c_1_list">Green Line - Cleveland Circle --> Government Center</option>
-        <option value="green_d_0_list">Green Line - North Station --> Riverside</option>
-        <option value="green_d_1_list">Green Line - Riverside --> North Station</option>
-        <option value="green_e_0_list">Green Line - Union Square --> Heath Street</option>
-        <option value="green_e_1_list">Green Line - Heath Street --> Union Square</option>
-        <option value="orange_0_list">Orange Line - Oak Grove --> Forest Hills</option>
-        <option value="orange_1_list">Orange Line - Forest Hills --> Oak Grove</option>
-        <option value="red_a_0_list">Red Line - Alewife --> Ashmont</option>
-        <option value="red_a_1_list">Red Line - Ashmont --> Alewife</option>
-        <option value="red_b_0_list">Red Line - Alewife --> Braintree</option>
-        <option value="red_b_1_list">Red Line - Braintree --> Alewife</option>
-    </select>
+    <div class="container">
 
-    <label for="first_stop_list">Choose your first stop: </label>
-    <select name="first_stop_list" id="select_first_stop_list" disabled>
-        <option>Select a line...</option> 
-    </select>
+        <div class="row">
+            <div class="col-12">
+                <h3>How long should you wait for the T?</h3>
+            </div>
+        </div>
 
-    <label for="second_stop_list">Choose your second stop: </label>
-    <select name="second_stop_list" id="select_second_stop_list" disabled>
-        <option>Select a line...</option>
-    </select>
+        <div class="row">
+            <div class="col-12">
+                <label for="list_of_lines">Choose a line: </label>
+                    <select name="list_of_lines" id="select_list_of_lines">
+                        <option value="blue_0_list">Blue Line - Wonderland --> Bowdoin</option>
+                        <option value="blue_1_list">Blue Line - Bowdoin --> Wonderland</option>
+                        <option value="green_b_0_list">Green Line - Government Center --> Boston College</option>
+                        <option value="green_b_1_list">Green Line - Boston College --> Government Center</option>
+                        <option value="green_c_0_list">Green Line - Government Center --> Cleveland Circle</option>
+                        <option value="green_c_1_list">Green Line - Cleveland Circle --> Government Center</option>
+                        <option value="green_d_0_list">Green Line - North Station --> Riverside</option>
+                        <option value="green_d_1_list">Green Line - Riverside --> North Station</option>
+                        <option value="green_e_0_list">Green Line - Union Square --> Heath Street</option>
+                        <option value="green_e_1_list">Green Line - Heath Street --> Union Square</option>
+                        <option value="orange_0_list">Orange Line - Oak Grove --> Forest Hills</option>
+                        <option value="orange_1_list">Orange Line - Forest Hills --> Oak Grove</option>
+                        <option value="red_a_0_list">Red Line - Alewife --> Ashmont</option>
+                        <option value="red_a_1_list">Red Line - Ashmont --> Alewife</option>
+                        <option value="red_b_0_list">Red Line - Alewife --> Braintree</option>
+                        <option value="red_b_1_list">Red Line - Braintree --> Alewife</option>
+                    </select>
+            </div>
+        </div>
 
-    <div id="time_waiting">
-        <p>Select a line and two stops to see how much time you should spend waiting at the T.</p>
+        <div class="row">
+            <div class="col-6">
+                <label for="first_stop_list">Choose your first stop: </label>
+                <select name="first_stop_list" id="select_first_stop_list" disabled>
+                    <option>Select a line...</option> 
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="second_stop_list">Choose your second stop: </label>
+                <select name="second_stop_list" id="select_second_stop_list" disabled>
+                    <option>Select a line...</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="time_waiting">
+                    <p>Select a line and two stops to see how much time you should spend waiting at the T.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script charset="utf-8" type="text/javascript">
