@@ -90,8 +90,7 @@
                         );
                     });
                     dropdown.first_stop_list.removeAttr('disabled');
-                    dropdown.second_stop_list.empty();
-                    $('#time_waiting p').text('Select a line and two stops to see how much time you should spend waiting at the T.');
+                    updateSecondStopList();
                 });
             }
         }
@@ -124,7 +123,7 @@
                         );
                     });
                     dropdown_two.second_stop_list.removeAttr('disabled');
-                    $('#time_waiting p').text('Select a line and two stops to see how much time you should spend waiting at the T.');
+                    updateTimeWaiting();
                 });
             }
         }
