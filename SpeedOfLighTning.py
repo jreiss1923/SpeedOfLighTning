@@ -13,10 +13,7 @@ def hello_world():
 def select_line():
     try:
         t_line_value = list(train_lists[request.args.get("list_of_lines")].values())
-        if request.args.get("list_of_lines") == "green_b_0_list" or request.args.get("list_of_lines") == "green_b_1_list" or request.args.get("list_of_lines") == "green_c_0_list" or request.args.get("list_of_lines") == "green_c_1_list":
-            return t_line_value[0:-1]
-        else:
-            return json.dumps(t_line_value[0:-1], ensure_ascii=True).replace("'", '"')
+        return json.dumps(t_line_value[0:-1])
     except Exception as e:
         print(repr(e))
 
@@ -26,10 +23,7 @@ def select_stop():
     t_line_value = train_lists[request.args.get("list_of_lines")]
     sub_train_list = list(t_line_value.values())[list(t_line_value.values()).index(t_stop_value)+1:]
     
-    if request.args.get("list_of_lines") == "green_b_0_list" or request.args.get("list_of_lines") == "green_b_1_list" or request.args.get("list_of_lines") == "green_c_0_list" or request.args.get("list_of_lines") == "green_c_1_list":
-        return sub_train_list
-    else:
-        return json.dumps(sub_train_list, ensure_ascii=True).replace("'", '"')
+    return json.dumps(sub_train_list)
 
 @app.route('/get_difference')
 def get_difference():
