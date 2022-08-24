@@ -83,8 +83,9 @@
             if (list_of_lines.length) {
                 dropdown.first_stop_list.empty()
                 $.getJSON("{{ url_for('select_line') }}", {list_of_lines: list_of_lines}, function(data) {
+                    console.log(data)
                     data.forEach(function(item) {
-                        console.log(typeof(item))
+                        console.log(item)
                         dropdown.first_stop_list.append(
                             $('<option value="' + item + '">' + item + '</option>')
                         );
@@ -114,10 +115,8 @@
 
             if (first_stop_list.length) {
                 dropdown_two.second_stop_list.empty()
-                console.log(first_stop_list)
                 $.getJSON("{{ url_for('select_stop') }}", {list_of_lines: list_of_lines, first_stop_list: first_stop_list}, function(data) {
                     data.forEach(function(item) {
-                        console.log(typeof(item))
                         dropdown_two.second_stop_list.append(
                             $('<option value="' + item + '">' + item + '</option>')
                         );
