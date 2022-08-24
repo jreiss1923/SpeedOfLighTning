@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-12">
-                <h3>How long should you wait for the T?</h3>
+                <h3>Should you wait for the T or walk?</h3>
             </div>
         </div>
 
@@ -161,7 +161,7 @@
             
             if (second_stop_list.length) {
                 $.getJSON("{{ url_for('get_difference') }}", {list_of_lines:list_of_lines, first_stop_list:first_stop_list, second_stop_list:second_stop_list}, function(data) {
-                    $('#time_waiting p').text('You should wait up to ' + data + ' minutes.');
+                    $('#time_waiting p').text('Walk if your expected wait is longer than ' + data + ' minutes.');
                 });
             }
         }
