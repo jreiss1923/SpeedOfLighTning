@@ -11,16 +11,25 @@ def hello_world():
 
 @app.route('/select_line')
 def select_line():
-    t_line_value = train_lists[request.args.get("list_of_lines")]
-    train_list = t_line_value
-    return json.dumps(t_line_value[0:-1], ensure_ascii=True).replace("'", '"')
+    try:
+        t_line_value = list(train_lists[request.args.get("list_of_lines")].values())
+        if request.args.get("list_of_lines") == "green_b_0_list" or request.args.get("list_of_lines") == "green_b_1_list" or request.args.get("list_of_lines") == "green_c_0_list" or request.args.get("list_of_lines") == "green_c_1_list":
+            return t_line_value[0:-1]
+        else:
+            return json.dumps(t_line_value[0:-1], ensure_ascii=True).replace("'", '"')
+    except Exception as e:
+        print(repr(e))
 
 @app.route('/select_stop')
 def select_stop():
     t_stop_value = request.args.get("first_stop_list")
     t_line_value = train_lists[request.args.get("list_of_lines")]
-    sub_train_list = t_line_value[t_line_value.index(t_stop_value)+1:]
-    return json.dumps(sub_train_list, ensure_ascii=True).replace("'", '"')
+    sub_train_list = list(t_line_value.values())[list(t_line_value.values()).index(t_stop_value)+1:]
+    
+    if request.args.get("list_of_lines") == "green_b_0_list" or request.args.get("list_of_lines") == "green_b_1_list" or request.args.get("list_of_lines") == "green_c_0_list" or request.args.get("list_of_lines") == "green_c_1_list":
+        return sub_train_list
+    else:
+        return json.dumps(sub_train_list, ensure_ascii=True).replace("'", '"')
 
 @app.route('/get_difference')
 def get_difference():
@@ -28,7 +37,11 @@ def get_difference():
     t_first_stop_value = request.args.get("first_stop_list")
     t_second_stop_value = request.args.get("second_stop_list")
 
+    t_first_stop_value = list(train_lists[t_line_value].keys())[list(train_lists[t_line_value].values()).index(t_first_stop_value)]
+    t_second_stop_value = list(train_lists[t_line_value].keys())[list(train_lists[t_line_value].values()).index(t_second_stop_value)]
+
     t_line_value = "walk_time_difference_" + "_".join(t_line_value.split("_")[0:-1])
+    
     t_first_stop_value = t_first_stop_value + "_" + t_line_value[-1]
     t_second_stop_value = t_second_stop_value + "_" + t_line_value[-1]
 
@@ -36,7 +49,7 @@ def get_difference():
     time_diff = walk_time_list[t_first_stop_value + " " + t_second_stop_value]
     return str(format(abs(time_diff/60), ".0f"))
 
-port = int(os.environ.get('PORT'))
+port = int(os.environ.get('PORT', 5000))
 
 
 if __name__ == '__main__':
