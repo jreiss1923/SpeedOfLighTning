@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="row">
+
+        </div>
 
         <div class="row">
             <div class="col-12">
@@ -79,16 +82,16 @@
         function changeBackgroundColor() {
             var list_of_lines = dropdown.list_of_lines.val();
             if (list_of_lines.split("_")[0] == "orange") {
-                document.body.style.backgroundImage = 'linear-gradient(orange, white 6%)';
+                document.body.style.backgroundImage = 'linear-gradient(orange, white 2em)';
             }
             else if (list_of_lines.split("_")[0] == "blue") {
-                document.body.style.backgroundImage = 'linear-gradient(blue, white 6%)';
+                document.body.style.backgroundImage = 'linear-gradient(blue, white 2em)';
             }
             else if (list_of_lines.split("_")[0] == "green") {
-                document.body.style.backgroundImage = 'linear-gradient(green, white 6%)';
+                document.body.style.backgroundImage = 'linear-gradient(green, white 2em)';
             }
             else if (list_of_lines.split("_")[0] == "red") {
-                document.body.style.backgroundImage = 'linear-gradient(red, white 6%)';
+                document.body.style.backgroundImage = 'linear-gradient(red, white 2em)';
             }
             
         }
