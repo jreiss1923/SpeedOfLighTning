@@ -116,10 +116,15 @@
         }
 
         // event listener to customer dropdown change
-        dropdown.list_of_lines.on('click', function() {
+        dropdown.list_of_lines.on('touchstart', function() {
             changeBackgroundColor();
             updateFirstStopList();
         });
+
+        dropdown.list_of_lines.on('click', function() {
+            changeBackgroundColor();
+            updateFirstStopList();
+        })
 
         var dropdown_two = {
             list_of_lines: $('#select_list_of_lines'),
