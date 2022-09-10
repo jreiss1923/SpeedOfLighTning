@@ -116,14 +116,9 @@
         }
 
         // event listener to customer dropdown change
-        dropdown.list_of_lines.on('touchend', function(event) {
-            event.preventDefault();
-            changeBackgroundColor();
-            updateFirstStopList();
-        });
 
         dropdown.list_of_lines.on('click', function(event) {
-            event.preventDefault();
+            event.stopPropagation();
             changeBackgroundColor();
             updateFirstStopList();
         });
