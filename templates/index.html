@@ -116,7 +116,7 @@
         }
 
         // event listener to customer dropdown change
-        dropdown.list_of_lines.on('touchstart', function(event) {
+        dropdown.list_of_lines.on('touchend', function(event) {
             event.preventDefault();
             changeBackgroundColor();
             updateFirstStopList();
