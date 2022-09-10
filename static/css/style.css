@@ -28,5 +28,21 @@ h3 {
 }
 
 #time_waiting p {
-    font-size: 2.5vw;
+    font-size: 2vw;
+}
+
+#select_list_of_lines {
+    font-size: 1em;
+}
+
+label {
+    font-size: 1.5em;
+}
+
+#select_first_stop_list {
+    font-size: 0.8em;
+}
+
+#select_second_stop_list {
+    font-size: 0.8em;
 }
