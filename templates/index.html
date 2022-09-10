@@ -116,15 +116,10 @@
         }
 
         // event listener to customer dropdown change
-        dropdown.list_of_lines.on('touchstart', function() {
+        dropdown.list_of_lines.on('touchstart click', function() {
             changeBackgroundColor();
             updateFirstStopList();
         });
-
-        dropdown.list_of_lines.on('click', function() {
-            changeBackgroundColor();
-            updateFirstStopList();
-        })
 
         var dropdown_two = {
             list_of_lines: $('#select_list_of_lines'),
@@ -153,7 +148,7 @@
         }
 
         // event listener to customer dropdown change
-        dropdown_two.first_stop_list.on('click', function() {
+        dropdown_two.first_stop_list.on('touchstart click', function() {
             updateSecondStopList();
         });
 
@@ -175,7 +170,7 @@
             }
         }
 
-        dropdown_three.second_stop_list.on('click', function() {
+        dropdown_three.second_stop_list.on('touchstart click', function() {
             updateTimeWaiting();
         })
 
